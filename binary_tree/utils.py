@@ -5,10 +5,11 @@ class TreeNode:
      self.right = right
 
 def insert(root, val):
+    """
+    insert value into first available slot
+    """
+    
     def _insert(root, parent, val):
-        """
-        insert value into first available slot
-        """
         if root is None:
             if parent.left is None:
                 parent.left = TreeNode(val)
@@ -32,6 +33,21 @@ def print_tree(root):
     print(root.val)
     print_tree(root.left)
     print_tree(root.right)
+
+def to_list(root):
+    """
+    returns a List repr of a Binary Tree
+    """
+    def _to_list(root, acc):
+        if root is None:
+            return acc
+
+        acc.append(root.val if root.val else None)
+        _to_list(root.left, acc)
+        _to_list(root.right, acc)
+        return acc
+    return _to_list(root, [])
+
     
 def to_tree(L):
     """
@@ -50,5 +66,6 @@ def to_tree(L):
 
 if __name__ == '__main__':
     tree = to_tree([1,3,2,5])
-    print_tree(tree)
+    #print_tree(tree)
+    print(to_list(tree))
 
